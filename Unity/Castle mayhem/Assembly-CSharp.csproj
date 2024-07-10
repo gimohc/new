@@ -66,7 +66,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Waypoint.cs" />
     <Compile Include="Assets\Scripts\EnemyMover.cs" />
-    <Compile Include="Assets\Scripts\UpdatePosition.cs" />
+    <Compile Include="Assets\Scripts\CoordinatesHandler.cs" />
+    <Compile Include="Assets\Scripts\EnemyDamage.cs" />
     <Compile Include="Assets\Scripts\FocusEnemy.cs" />
   </ItemGroup>
   <ItemGroup>

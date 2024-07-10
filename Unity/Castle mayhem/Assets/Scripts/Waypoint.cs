@@ -8,6 +8,12 @@ public class Waypoint : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] GameObject ballistaPrefab;
     [SerializeField] bool isPlacable;
+    public bool IsPlacable {
+        get {
+            return isPlacable;
+        }
+    }
+
     void OnMouseDown()
     {
         if (isPlacable)
@@ -16,4 +22,5 @@ public class Waypoint : MonoBehaviour
             isPlacable = false;
         }
     }
+   
 }
