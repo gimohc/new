@@ -9,22 +9,24 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] List<Transform> path = new List<Transform>();
     [SerializeField][Range(0f, 5f)] float speed = 1.5f;
 
-    private void Awake()
-    {
+    private void FindPath() {
         path.Clear();
         GameObject waypoints = GameObject.FindGameObjectWithTag("Path");//.GetComponentsInChildren<Waypoint>();
         foreach (Transform child in waypoints.transform)
         {
             path.Add(child);
         }
+        ReturnToStart();
+    }
+    void OnEnable() {
+        FindPath();
+        TravelPath();
+        StartCoroutine(TravelPath());
+    }
+    private void ReturnToStart() {
         transform.position = path[0].transform.position;
     }
 
-    void Start()
-    {
-        StartCoroutine(TravelPath());
-
-    }
 
     // Update is called once per frame
     IEnumerator TravelPath()
@@ -46,6 +48,7 @@ public class EnemyMover : MonoBehaviour
             }
             //yield return new WaitForSeconds(1f);
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        ReturnToStart();
     }
 }
