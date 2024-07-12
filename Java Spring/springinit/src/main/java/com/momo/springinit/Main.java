@@ -14,11 +14,11 @@ public class Main {
 	public static void main(String[] args) {
 		SpringApplication.run(Main.class, args);
 	}
-	@GetMapping("/greet")
+	/*@GetMapping("/greet")
 	public GreetResponse greet() {
 		return new GreetResponse("Hello",List.of("a", "b", "c"));
 	}
 	record GreetResponse(String greet, List<String> food) {
 
-	}
+	}*/
 }
