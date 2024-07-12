@@ -499,26 +499,26 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 2cfbffff
+      scrollPos: {x: 0, y: 5458}
+      m_SelectedIDs: d0600000
+      m_LastClickedID: 24784
+      m_ExpandedIDs: e833ffff0673ffff16d6ffff2cfbffffd65e00008e5f0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Ballista(Clone)
+        m_OriginalName: Ballista(Clone)
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -24094
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 9}
+        m_ClientGUIView: {fileID: 2}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -921,9 +921,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -16.95153, y: -46.006668, z: 31.666695}
+    m_Target: {x: 0.383718, y: -74.96736, z: 106.01083}
     speed: 2
-    m_Value: {x: -16.95153, y: -46.006668, z: 31.666695}
+    m_Value: {x: 0.383718, y: -74.96736, z: 106.01083}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -969,9 +969,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 1
   m_Rotation:
-    m_Target: {x: -0.46302146, y: 0.13624571, z: -0.0722366, w: -0.872663}
+    m_Target: {x: -0.32286358, y: 0.0045604655, z: -0.0016533111, w: -0.9462797}
     speed: 2
-    m_Value: {x: -0.46308845, y: 0.13626543, z: -0.07224705, w: -0.87278926}
+    m_Value: {x: -0.32291046, y: 0.0045611276, z: -0.0016535511, w: -0.9464171}
   m_Size:
     m_Target: 95.67789
     speed: 2
@@ -1245,7 +1245,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -81126
+  m_LastSelectedObjectID: -52248
 --- !u!114 &21
 MonoBehaviour:
   m_ObjectHideFlags: 52

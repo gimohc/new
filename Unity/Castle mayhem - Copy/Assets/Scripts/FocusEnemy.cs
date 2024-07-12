@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
+
 
 public class FocusEnemy : MonoBehaviour
 {
@@ -10,42 +12,61 @@ public class FocusEnemy : MonoBehaviour
     [SerializeField] float range = 15f;
     [SerializeField] ParticleSystem projectileParticles;
     [SerializeField] int price = 150;
+    [SerializeField] List<Transform> enemies;
 
+    //Transform endOfPath;
     Transform target;
 
     void Start()
     {
-        target = FindObjectOfType<Enemy>().transform;
+        Enemy[] enemyA = FindObjectsOfType<Enemy>();
+        //endOfPath = GameObject.FindGameObjectWithTag("End").transform;
+        foreach (Enemy enemy in enemyA)
+        {
+            enemies.Add(enemy.transform);
+        }
+        target = enemies[0].transform;
+        FindFirstTarget();
     }
     void Update()
     {
+
         FindFirstTarget();
         weapon.LookAt(target);
     }
     void FindFirstTarget()
     {
-        /*Enemy[] enemies = FindObjectsOfType<Enemy>();
-        Transform closest = null;
-        float maxDistance = Mathf.Infinity;
 
-        foreach(Enemy enemy in enemies) {
-            float targetDistance = Vector3.Distance(transform.position, enemy.transform.position);
-            if(targetDistance < maxDistance) {
-                closest = enemy.transform;
-                maxDistance = targetDistance;
-            }
-
-            target = closest;
-        }*/
         var emission = projectileParticles.emission;
-        if (Vector3.Distance(transform.position, target.transform.position) > range) 
+        if (UnityEngine.Vector3.Distance(transform.position, target.transform.position) > range)
+        {
+            StartCoroutine(IterateEnemies());
             emission.enabled = false;
-        else 
+        }
+        else
             emission.enabled = true;
-        if (!target.parent.gameObject.activeInHierarchy || target == null)
-            target = FindObjectOfType<Enemy>().transform;
+        if (!target.gameObject.activeInHierarchy)
+            StartCoroutine(IterateEnemies());
     }
-    public int GetPrice() {
+    private IEnumerator IterateEnemies()
+    {
+
+        // iterate over all enemies and find distances every 0.5, once you have a target in range iterate over it over and over until it is out then find the next closest. <--
+
+        target = enemies[0].transform;
+        foreach (Transform enemy in enemies)
+        {
+            if (UnityEngine.Vector3.Distance(transform.position, enemy.position) < UnityEngine.Vector3.Distance(transform.position, target.position))
+                // compare distance of each enemy to the closest
+                target = enemy;
+
+
+        }
+        yield return new WaitForSeconds(0.5f);
+    }
+    public int GetPrice()
+    {
         return price;
     }
 }
+

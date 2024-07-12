@@ -38,14 +38,15 @@ public class FocusEnemy : MonoBehaviour
             target = closest;
         }*/
         var emission = projectileParticles.emission;
-        if (Vector3.Distance(transform.position, target.transform.position) > range) 
+        if (Vector3.Distance(transform.position, target.transform.position) > range)
             emission.enabled = false;
-        else 
+        else
             emission.enabled = true;
         if (!target.parent.gameObject.activeInHierarchy || target == null)
             target = FindObjectOfType<Enemy>().transform;
     }
-    public int GetPrice() {
+    public int GetPrice()
+    {
         return price;
     }
 }
