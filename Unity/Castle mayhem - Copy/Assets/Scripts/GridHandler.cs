@@ -5,8 +5,13 @@ using UnityEngine;
 public class GridHandler : MonoBehaviour
 {
     [SerializeField] Vector2Int gridSize;
-    Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
+    private Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
 
+    public Node GetNode(Vector2Int key) {
+        if(grid.ContainsKey(key))
+            return grid[key];
+        return null;
+    } 
     void Awake()
     {
         CreateGrid();

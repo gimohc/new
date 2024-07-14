@@ -9,15 +9,17 @@ public class CoordinatesHandler : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] Color defaultColor = Color.white;
-    [SerializeField] Color placedColor = Color.gray;
+    [SerializeField] Color pathColor = new Color(1f, 0.5f, 0f);
+    [SerializeField] Color blockedColor = Color.red;
+    [SerializeField] Color exploredColor = Color.yellow;
     private TextMeshPro textMeshPro;
-    private Waypoint waypoint;
     Transform parent;
+    GridHandler gridHandler;
     private void Awake()
     {
         textMeshPro = GetComponent<TextMeshPro>();
         textMeshPro.enabled = false;
-        waypoint = GetComponentInParent<Waypoint>();
+        gridHandler = FindObjectOfType<GridHandler>();
 
     }
     private void Update()
@@ -36,22 +38,38 @@ public class CoordinatesHandler : MonoBehaviour
     }
     private void SetColor()
     {
-        textMeshPro.color = ((waypoint.IsPlacable) ? defaultColor : placedColor);
-        /*if (waypoint.IsPlacable) {
-            textMeshPro.color = defaultColor;
+        //textMeshPro.color = ((waypoint.IsPlacable) ? defaultColor : placedColor);
+        if (gridHandler == null)
+            return;
+        Node node = gridHandler.GetNode(GetCoordinates());
+        if (node == null) return;
+
+        if (!node.isWalkable)
+            textMeshPro.color = blockedColor;
+        else if (node.isPath)
+            textMeshPro.color = pathColor;
+        else if (node.isExplored)
+        {
+            textMeshPro.color = exploredColor;
         }
-        else textMeshPro.color = placedColor;*/
+        else
+            textMeshPro.color = defaultColor;
+
+    }
+    private Vector2Int GetCoordinates()
+    {
+        int x = (int)Mathf.Round(transform.parent.position.x / UnityEditor.EditorSnapSettings.move.x);
+        int y = (int)Mathf.Round(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);
+
+        return new Vector2Int(x, y);
     }
     private void updateText()
     {
         parent = this.transform.parent;
-        int x = (int)Mathf.Round(parent.position.x / UnityEditor.EditorSnapSettings.move.x);
-        int y = (int)Mathf.Round(parent.position.z / UnityEditor.EditorSnapSettings.move.z);
-        textMeshPro.text = x + " , " + y;
-        updateName(x, y);
+        textMeshPro.text = GetCoordinates().x + "," + GetCoordinates().y;
     }
     private void updateName(int x, int y)
     {
-        parent.name = "(" + x + "," + y + ")";
+        parent.name = "(" + GetCoordinates().x + "," + GetCoordinates().y + ")";
     }
 }
