@@ -65,16 +65,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Waypoint.cs" />
-    <Compile Include="Assets\Scripts\Enemy.cs" />
-    <Compile Include="Assets\Scripts\EnemyMover.cs" />
-    <Compile Include="Assets\Scripts\CoordinatesHandler.cs" />
-    <Compile Include="Assets\Scripts\ObjectPool.cs" />
-    <Compile Include="Assets\Scripts\Node.cs" />
+    <Compile Include="Assets\Scripts\Enemy\ObjectPool.cs" />
+    <Compile Include="Assets\Scripts\PathFinding\PathFinder.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyDamage.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
-    <Compile Include="Assets\Scripts\EnemyDamage.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyMover.cs" />
     <Compile Include="Assets\Scripts\FocusEnemy.cs" />
     <Compile Include="Assets\Scripts\Bank.cs" />
-    <Compile Include="Assets\Scripts\GridHandler.cs" />
+    <Compile Include="Assets\Scripts\PathFinding\CoordinatesHandler.cs" />
+    <Compile Include="Assets\Scripts\PathFinding\GridHandler.cs" />
+    <Compile Include="Assets\Scripts\PathFinding\Node.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
