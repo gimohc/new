@@ -5,6 +5,12 @@ using UnityEngine;
 public class GridHandler : MonoBehaviour
 {
     [SerializeField] Vector2Int gridSize;
+
+    [Tooltip("should match unity world gridsize")]
+    [SerializeField] int worldGridSize = 10;// = UnityEditor.EditorSnapSettings.move.x;
+
+    public int WorldGridSize {get { return worldGridSize; }}
+
     private Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
     public Dictionary<Vector2Int, Node> Grid {get {return grid;} }
 
@@ -29,6 +35,23 @@ public class GridHandler : MonoBehaviour
             }
         }
 
+    }
+    public void BlockNode(Vector2Int coordinates) {
+        if(grid.ContainsKey(coordinates)) {
+            grid[coordinates].isWalkable = false;
+
+        }
+    }
+    public Vector2Int GetCoordinatesFromPosition(Vector3 position) {
+        int x = (int)Mathf.Round(position.x / worldGridSize);
+        int y = (int)Mathf.Round(position.z / worldGridSize);
+        
+
+        return new Vector2Int(x,y);
+    }
+    public Vector3 GetPositionFromCoordinates(Vector2Int coordinates) {
+        return new Vector3(coordinates.x/worldGridSize, 0, coordinates.y/worldGridSize);
+        
     }
     void Start()
     {

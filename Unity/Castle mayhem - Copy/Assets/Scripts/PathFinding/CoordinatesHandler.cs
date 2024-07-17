@@ -58,8 +58,12 @@ public class CoordinatesHandler : MonoBehaviour
     }
     private Vector2Int GetCoordinates()
     {
-        int x = (int)Mathf.Round(transform.parent.position.x / UnityEditor.EditorSnapSettings.move.x);
-        int y = (int)Mathf.Round(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);
+        if(gridHandler == null) return new Vector2Int();
+
+        int x = (int)Mathf.Round(transform.parent.position.x / gridHandler.WorldGridSize);
+        int y = (int)Mathf.Round(transform.parent.position.z / gridHandler.WorldGridSize);
+
+
 
         return new Vector2Int(x, y);
     }
@@ -67,9 +71,7 @@ public class CoordinatesHandler : MonoBehaviour
     {
         parent = this.transform.parent;
         textMeshPro.text = GetCoordinates().x + "," + GetCoordinates().y;
-    }
-    private void updateName(int x, int y)
-    {
         parent.name = "(" + GetCoordinates().x + "," + GetCoordinates().y + ")";
     }
+
 }

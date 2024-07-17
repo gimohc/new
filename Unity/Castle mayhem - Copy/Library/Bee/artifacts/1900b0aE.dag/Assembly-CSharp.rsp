@@ -366,7 +366,7 @@
 "Assets/Scripts/PathFinding/Node.cs"
 "Assets/Scripts/PathFinding/PathFinder.cs"
 "Assets/Scripts/Player.cs"
-"Assets/Scripts/Waypoint.cs"
+"Assets/Scripts/Tile.cs"
 -langversion:9.0
 /deterministic
 /optimize+
