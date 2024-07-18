@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class GridHandler : MonoBehaviour
@@ -12,7 +13,6 @@ public class GridHandler : MonoBehaviour
     public int WorldGridSize {get { return worldGridSize; }}
 
     private Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
-    public Dictionary<Vector2Int, Node> Grid {get {return grid;} }
 
     public Node GetNode(Vector2Int key) {
         if(grid.ContainsKey(key))
@@ -21,9 +21,13 @@ public class GridHandler : MonoBehaviour
     } 
     void Awake()
     {
+
         CreateGrid();
 
     }
+
+
+    // gridSize doesnt change, doesnt matter where the starting or ending point is. which might cause an issue later
     void CreateGrid()
     {
         for (int i = 0; i < gridSize.x; i++)
@@ -36,6 +40,14 @@ public class GridHandler : MonoBehaviour
         }
 
     }
+    public void ResetNodes() {
+        foreach(KeyValuePair<Vector2Int, Node> entry in grid) {
+            entry.Value.next = null;
+            entry.Value.isExplored = false;
+            entry.Value.isPath = false;
+        }
+    }
+
     public void BlockNode(Vector2Int coordinates) {
         if(grid.ContainsKey(coordinates)) {
             grid[coordinates].isWalkable = false;
@@ -52,16 +64,5 @@ public class GridHandler : MonoBehaviour
     public Vector3 GetPositionFromCoordinates(Vector2Int coordinates) {
         return new Vector3(coordinates.x/worldGridSize, 0, coordinates.y/worldGridSize);
         
-    }
-    void Start()
-    {
-
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

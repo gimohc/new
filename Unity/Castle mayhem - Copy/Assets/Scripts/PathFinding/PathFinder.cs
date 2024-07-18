@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -18,7 +19,6 @@ public class PathFinder : MonoBehaviour
     Vector2Int[] directions = { Vector2Int.up, Vector2Int.right, Vector2Int.down, Vector2Int.left };
     GridHandler gridHandler;
 
-    //Dictionary<Vector2Int, Node> grid;
 
 
     void Awake()
@@ -30,9 +30,8 @@ public class PathFinder : MonoBehaviour
     {
         startNode = gridHandler.GetNode(startCoordinates);
         finishNode = gridHandler.GetNode(finishCoordinates);
-        BreadthFirstSearch();
 
-        BuildPath();
+        BuildNewPath();
     }
     void ExploreNeighbors(Node current)
     {
@@ -63,6 +62,9 @@ public class PathFinder : MonoBehaviour
     }
     void BreadthFirstSearch()
     {
+        unexplored.Clear();
+        reached.Clear();
+
         bool isRunning = true;
         unexplored.Enqueue(startNode);
         reached.Add(startCoordinates, startNode);
@@ -76,6 +78,9 @@ public class PathFinder : MonoBehaviour
                 isRunning = false;
             }
         }
+    }
+    private void ResetNodes() {
+        gridHandler.ResetNodes();
     }
 
     List<Node> BuildPath()
@@ -97,5 +102,28 @@ public class PathFinder : MonoBehaviour
         return path;
 
     }
+    public bool WillBlockPath(Vector2Int coordinates) { 
+        Node node = gridHandler.GetNode(coordinates);
+        if(node != null) {
+            bool previousState = node.isWalkable;
+            node.isWalkable = false;
+            List<Node> newPath = BuildNewPath();
+            node.isWalkable = previousState;
+
+            if(newPath.Count <= 1) {
+                BuildNewPath();
+                return true;
+            }
+
+        }
+        return false;
+
+    }
+    List<Node> BuildNewPath() {
+        ResetNodes();
+        BreadthFirstSearch();
+        return BuildPath();
+    }
+
 
 }

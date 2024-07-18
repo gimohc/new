@@ -361,6 +361,8 @@
 "Assets/Scripts/Enemy/EnemyMover.cs"
 "Assets/Scripts/Enemy/ObjectPool.cs"
 "Assets/Scripts/FocusEnemy.cs"
+"Assets/Scripts/PathFinding/Backup_Gridhandler.cs"
+"Assets/Scripts/PathFinding/Backup_Pathfinder.cs"
 "Assets/Scripts/PathFinding/CoordinatesHandler.cs"
 "Assets/Scripts/PathFinding/GridHandler.cs"
 "Assets/Scripts/PathFinding/Node.cs"

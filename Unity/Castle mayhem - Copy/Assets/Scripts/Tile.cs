@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] GameObject ballistaPrefab;
     [SerializeField] bool isPlacable;
     GridHandler gridHandler;
     Vector2Int coordinates = new Vector2Int();
+    PathFinder pathFinder;
     void Awake()
     {
         gridHandler = FindObjectOfType<GridHandler>();
+        pathFinder = FindObjectOfType<PathFinder>();
     }
     void Start()
     {
@@ -36,11 +37,18 @@ public class Tile : MonoBehaviour
     void OnMouseDown()
     {
         int price = ballistaPrefab.GetComponent<FocusEnemy>().GetPrice();
-        if (isPlacable && Bank.Instance.Balance() >= price)
+        Node current = gridHandler.GetNode(coordinates);
+            
+        if (current != null && current.isWalkable && Bank.Instance.Balance() >= price && !pathFinder.WillBlockPath(coordinates))
         {
             Instantiate(ballistaPrefab, transform.position, Quaternion.identity);
             Bank.Instance.ConsumeMoney(price);
             isPlacable = false;
+            
+            {
+                current.isWalkable = false;
+            }
+
         }
     }
 
