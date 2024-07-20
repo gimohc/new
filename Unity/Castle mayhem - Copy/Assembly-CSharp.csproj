@@ -64,20 +64,19 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.36f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Tile.cs" />
-    <Compile Include="Assets\Scripts\PathFinding\Backup_Pathfinder.cs" />
+    <Compile Include="Assets\Scripts\PathFinding\Tile.cs" />
     <Compile Include="Assets\Scripts\Enemy\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\PathFinding\PathFinder.cs" />
-    <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyDamage.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyMover.cs" />
     <Compile Include="Assets\Scripts\FocusEnemy.cs" />
     <Compile Include="Assets\Scripts\Bank.cs" />
     <Compile Include="Assets\Scripts\PathFinding\CoordinatesHandler.cs" />
+    <Compile Include="Assets\Scripts\Backup\Backup_Pathfinder.cs" />
     <Compile Include="Assets\Scripts\PathFinding\GridHandler.cs" />
     <Compile Include="Assets\Scripts\PathFinding\Node.cs" />
-    <Compile Include="Assets\Scripts\PathFinding\Backup_Gridhandler.cs" />
+    <Compile Include="Assets\Scripts\Backup\Backup_Gridhandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

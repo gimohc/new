@@ -8,7 +8,16 @@ public class PathFinder : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] Vector2Int startCoordinates;
+    public Vector2Int StartCoordinates
+    {
+        get { return startCoordinates; }
+    }
     [SerializeField] Vector2Int finishCoordinates;
+    public Vector2Int FinishCoordinates
+    {
+        get { return finishCoordinates; }
+    }
+
     Node startNode;
     Node finishNode;
     Node currentSearchNode;
@@ -24,14 +33,18 @@ public class PathFinder : MonoBehaviour
     void Awake()
     {
         gridHandler = FindObjectOfType<GridHandler>();
+        startNode = gridHandler.GetNode(startCoordinates);
+        finishNode = gridHandler.GetNode(finishCoordinates);
+        startNode.isWalkable = true;
+        finishNode.isWalkable = true;
 
     }
     void Start()
     {
-        startNode = gridHandler.GetNode(startCoordinates);
-        finishNode = gridHandler.GetNode(finishCoordinates);
 
         BuildNewPath();
+
+
     }
     void ExploreNeighbors(Node current)
     {
@@ -40,7 +53,7 @@ public class PathFinder : MonoBehaviour
         {
 
             Vector2Int neighborCoords = current.coordinates + direction;
-            Debug.Log(neighborCoords);
+            //Debug.Log(neighborCoords);
 
             Node node = gridHandler.GetNode(neighborCoords);
             if (node == null)
@@ -79,10 +92,10 @@ public class PathFinder : MonoBehaviour
             }
         }
     }
-    private void ResetNodes() {
+    private void ResetNodes()
+    {
         gridHandler.ResetNodes();
     }
-
     List<Node> BuildPath()
     {
         List<Node> path = new List<Node>();
@@ -102,15 +115,18 @@ public class PathFinder : MonoBehaviour
         return path;
 
     }
-    public bool WillBlockPath(Vector2Int coordinates) { 
+    public bool WillBlockPath(Vector2Int coordinates)
+    {
         Node node = gridHandler.GetNode(coordinates);
-        if(node != null) {
+        if (node != null)
+        {
             bool previousState = node.isWalkable;
             node.isWalkable = false;
             List<Node> newPath = BuildNewPath();
             node.isWalkable = previousState;
 
-            if(newPath.Count <= 1) {
+            if (newPath.Count <= 1)
+            {
                 BuildNewPath();
                 return true;
             }
@@ -119,7 +135,8 @@ public class PathFinder : MonoBehaviour
         return false;
 
     }
-    List<Node> BuildNewPath() {
+    public List<Node> BuildNewPath()
+    {
         ResetNodes();
         BreadthFirstSearch();
         return BuildPath();

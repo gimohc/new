@@ -26,7 +26,8 @@ public class CoordinatesHandler : MonoBehaviour
     {
         ToggleText();
         SetColor();
-        if (Application.isPlaying) return;
+        if (Application.isPlaying) 
+            return;
         updateText();
     }
     private void ToggleText()
@@ -58,7 +59,7 @@ public class CoordinatesHandler : MonoBehaviour
     }
     private Vector2Int GetCoordinates()
     {
-        if(gridHandler == null) return new Vector2Int();
+        if (gridHandler == null) return new Vector2Int();
 
         int x = (int)Mathf.Round(transform.parent.position.x / gridHandler.WorldGridSize);
         int y = (int)Mathf.Round(transform.parent.position.z / gridHandler.WorldGridSize);
