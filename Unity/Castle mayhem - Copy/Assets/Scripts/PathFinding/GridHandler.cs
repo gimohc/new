@@ -66,9 +66,10 @@ public class GridHandler : MonoBehaviour
 
         return new Vector2Int(x, y);
     }
+
     public Vector3 GetPositionFromCoordinates(Vector2Int coordinates)
     {
-        return new Vector3(Mathf.RoundToInt(coordinates.x / worldGridSize), 0, Mathf.RoundToInt(coordinates.y / worldGridSize));
+        return new Vector3(Mathf.RoundToInt(coordinates.x * worldGridSize), 0, Mathf.RoundToInt(coordinates.y * worldGridSize));
 
     }
 }

@@ -44,10 +44,9 @@ public class Tile : MonoBehaviour
             Instantiate(ballistaPrefab, transform.position, Quaternion.identity);
             Bank.Instance.ConsumeMoney(price);
             isPlacable = false;
+            current.isWalkable = false;
+            pathFinder.NotifyReceivers();
             
-            {
-                current.isWalkable = false;
-            }
 
         }
     }

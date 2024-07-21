@@ -18,18 +18,25 @@ public class EnemyMover : MonoBehaviour
         gridHandler = FindObjectOfType<GridHandler>();
         pathFinder = FindObjectOfType<PathFinder>();
     }
-    private void FindPath()
+    void RecalculatePath(bool reset)
     {
         //path.Clear();
-        ReturnToStart();
-        path = pathFinder.BuildNewPath();
+        Vector2Int coordinates = new Vector2Int();
+        if (reset)
+            coordinates = pathFinder.StartCoordinates;
+        else
+            coordinates = gridHandler.GetCoordinatesFromPosition(transform.position);
+        StopAllCoroutines();
+        path = pathFinder.BuildNewPath(coordinates);
+        StartCoroutine(TravelPath());
 
     }
     void OnEnable()
     {
-        FindPath();
+        ReturnToStart();
+        RecalculatePath(true);
         //TravelPath();
-        StartCoroutine(TravelPath());
+
     }
     private void ReturnToStart()
     {
@@ -40,8 +47,8 @@ public class EnemyMover : MonoBehaviour
     // Update is called once per frame
     IEnumerator TravelPath()
     {
-        Debug.Log(path.Count);
-        for (int i = 0; i < path.Count; i++)
+        //Debug.Log(path.Count);
+        for (int i = 1; i < path.Count; i++)
         //foreach(Node element in path)
         {
             Vector3 startPosition = this.transform.position;
@@ -55,6 +62,7 @@ public class EnemyMover : MonoBehaviour
 
             while (travelPercent < 1f)
             {
+
                 travelPercent += (Time.deltaTime * speed);
                 transform.position = Vector3.Lerp(startPosition, endPosition, travelPercent);
                 yield return new WaitForEndOfFrame();
@@ -66,6 +74,5 @@ public class EnemyMover : MonoBehaviour
         Player.Instance.GetDamaged(
             GetComponent<EnemyDamage>().GetPenalty()
         );
-        ReturnToStart();
     }
 }
