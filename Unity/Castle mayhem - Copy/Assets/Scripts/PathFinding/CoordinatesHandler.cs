@@ -26,7 +26,7 @@ public class CoordinatesHandler : MonoBehaviour
     {
         ToggleText();
         SetColor();
-        if (Application.isPlaying) 
+        if (Application.isPlaying)
             return;
         updateText();
     }

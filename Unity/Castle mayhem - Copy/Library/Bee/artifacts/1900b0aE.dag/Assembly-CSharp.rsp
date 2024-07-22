@@ -368,6 +368,7 @@
 "Assets/Scripts/PathFinding/PathFinder.cs"
 "Assets/Scripts/PathFinding/Tile.cs"
 "Assets/Scripts/Player.cs"
+"Assets/Scripts/Tower.cs"
 -langversion:9.0
 /deterministic
 /optimize+

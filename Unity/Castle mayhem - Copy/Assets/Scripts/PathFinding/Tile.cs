@@ -38,7 +38,7 @@ public class Tile : MonoBehaviour
     {
         int price = ballistaPrefab.GetComponent<FocusEnemy>().GetPrice();
         Node current = gridHandler.GetNode(coordinates);
-            
+
         if (current != null && current.isWalkable && Bank.Instance.Balance() >= price && !pathFinder.WillBlockPath(coordinates))
         {
             Instantiate(ballistaPrefab, transform.position, Quaternion.identity);
@@ -46,7 +46,7 @@ public class Tile : MonoBehaviour
             isPlacable = false;
             current.isWalkable = false;
             pathFinder.NotifyReceivers();
-            
+
 
         }
     }

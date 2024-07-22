@@ -146,7 +146,8 @@ public class PathFinder : MonoBehaviour
         BreadthFirstSearch(coordinates);
         return BuildPath();
     }
-    public void NotifyReceivers() {
+    public void NotifyReceivers()
+    {
         BroadcastMessage("RecalculatePath", false, SendMessageOptions.DontRequireReceiver);
     }
 

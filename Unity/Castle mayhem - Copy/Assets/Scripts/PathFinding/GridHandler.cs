@@ -30,9 +30,9 @@ public class GridHandler : MonoBehaviour
     // gridSize doesnt change, doesnt matter where the starting or ending point is. which might cause an issue later
     void CreateGrid()
     {
-        for (int i = -8; i < gridSize.x; i++)
+        for (int i = 0; i < gridSize.x; i++)
         {
-            for (int j = -4; j < gridSize.y; j++)
+            for (int j = 0; j < gridSize.y; j++)
             {
                 Vector2Int coords = new Vector2Int(i, j);
                 grid.Add(coords, new Node(coords, true));
