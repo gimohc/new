@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 1518951623161080260}
   - component: {fileID: 6420488650554743937}
   - component: {fileID: 3876770755050580151}
-  - component: {fileID: -421863805053615336}
   m_Layer: 0
   m_Name: Ram
   m_TagString: Untagged
@@ -169,15 +168,4 @@ MonoBehaviour:
   maxHP: 10
   reward: 50
   penalty: 2
---- !u!114 &-421863805053615336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5040643765344069697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cee7b64c3033ae4c8d22a6bf9936128, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  difficultyRamp: 2
