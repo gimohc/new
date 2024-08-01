@@ -9,42 +9,52 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] InputAction move;
     [SerializeField] InputAction faceDirection;
+    [SerializeField] InputAction jump;
+
     [SerializeField] float movementFactor = 20f;
     [SerializeField] float sensitivityFactor = 1f;
+    [SerializeField] float jumpingFactor = 1f;
+    [SerializeField] float jumpHeight = 5f;
 
     void Start()
     {
         move.Enable();
         faceDirection.Enable();
+        jump.Enable();
+
     }
 
     // Update is called once per frame
+
     void Update()
     {
-        HandleMovement();
         HandleDirection();
-        float z = transform.rotation.z;
-        z = 0;
+        HandleMovement();
+        Jump();
     }
+    // ws = y (front and back is the move.y) 
+    // ad = x (left and right is the move.x)
     void HandleMovement()
     {
         Vector2 movementInput = move.ReadValue<Vector2>() * Time.deltaTime * movementFactor;
+        float rotationY = transform.eulerAngles.y * Mathf.Deg2Rad;
 
-
-        transform.Translate(movementInput.x, 0, movementInput.y);
-        //transform.localPosition += new Vector3(movementInput.x, 0, movementInput.y);
+        transform.Translate(Mathf.Cos(rotationY) * movementInput.x, 0, Mathf.Sin(rotationY) * movementInput.x, Space.World);
+        transform.Translate(Mathf.Sin(rotationY) * movementInput.y, 0, Mathf.Cos(rotationY) * movementInput.y, Space.World);
+        //transform.position += new Vector3(Mathf.Cos(rotationY) * movementInput.y, 0, Mathf.Sin(rotationY) * movementInput.y); // front backwards movement 
 
     }
     void HandleDirection()
     {
         Vector2 directionInput = faceDirection.ReadValue<Vector2>() * Time.deltaTime * sensitivityFactor;
 
-        transform.localRotation *= Quaternion.Euler(-directionInput.y, directionInput.x, 0);//, Space.Self);
-        //Vector3 rotation = new Vector3(-directionInput.y, directionInput.x, 0);
-        //Debug.Log(rotation);
-        //transform.rotation *= Quaternion.Euler(rotation);
+        transform.Rotate(-directionInput.y, directionInput.x, 0, Space.Self);
+        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
 
-
+    }
+    void Jump()
+    {
+        float jumpInput = jump.ReadValue<float>() * Time.deltaTime * jumpingFactor;
 
     }
 }
