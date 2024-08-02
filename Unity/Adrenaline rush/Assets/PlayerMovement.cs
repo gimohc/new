@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleDirection();
         HandleMovement();
-        Jump();
+        StartCoroutine(Jump());
     }
     // ws = y (front and back is the move.y) 
     // ad = x (left and right is the move.x)
@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 movementInput = move.ReadValue<Vector2>() * Time.deltaTime * movementFactor;
         float rotationY = transform.eulerAngles.y * Mathf.Deg2Rad;
 
-        transform.Translate(Mathf.Cos(rotationY) * movementInput.x, 0, Mathf.Sin(rotationY) * movementInput.x, Space.World);
+        transform.Translate(Mathf.Cos(rotationY) * movementInput.x, 0, -Mathf.Sin(rotationY) * movementInput.x, Space.World);
         transform.Translate(Mathf.Sin(rotationY) * movementInput.y, 0, Mathf.Cos(rotationY) * movementInput.y, Space.World);
         //transform.position += new Vector3(Mathf.Cos(rotationY) * movementInput.y, 0, Mathf.Sin(rotationY) * movementInput.y); // front backwards movement 
 
@@ -52,9 +52,32 @@ public class PlayerMovement : MonoBehaviour
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
 
     }
-    void Jump()
+    private IEnumerator Jump()
     {
         float jumpInput = jump.ReadValue<float>() * Time.deltaTime * jumpingFactor;
+        if (jumpInput > 0)
+        {
+            float jumpPercent = 0f;
+            Vector3 startPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            Vector3 finishPosition = new Vector3(startPosition.x, startPosition.y + jumpHeight, startPosition.z);
+            Debug.Log(startPosition);
+            while (jumpPercent < 1f)
+            {
+                jumpPercent += jumpInput * Time.deltaTime;
+                transform.position = Vector3.Lerp(startPosition, finishPosition, jumpPercent);
+            }
+            Debug.Log(startPosition);
+            yield return new WaitForEndOfFrame();
 
+            while (jumpPercent > 0f)
+            {
+                jumpPercent -= jumpInput * Time.deltaTime;
+                transform.position = Vector3.Lerp(finishPosition, startPosition, jumpPercent);
+            }
+
+            yield return new WaitForSeconds(0.5f);
+
+        }
     }
+
 }
