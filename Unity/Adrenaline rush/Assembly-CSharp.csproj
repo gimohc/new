@@ -67,6 +67,7 @@
     <Compile Include="Assets\Player.cs" />
     <Compile Include="Assets\PlayerMovement.cs" />
     <Compile Include="Assets\EnemyPatrol.cs" />
+    <Compile Include="Assets\Floor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
